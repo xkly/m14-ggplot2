@@ -1,7 +1,7 @@
 # Exercise 1: ggplot2 basics
 
 # Install and load `ggplot2`
-install.packages("ggplot2")
+# install.packages("ggplot2")
 library(ggplot2)
 # You will also want to load `dplyr`
 library(dplyr)
@@ -49,36 +49,49 @@ ggplot(data = diamonds.sample) +
 
 # Draw a scatter plot for `diamonds.sample` of *`cut`* by `carat`, where each
 # point has an aesthetic _size_ based on the diamond's *`price`*
-
+ggplot(data = diamonds.sample) +
+  geom_point(mapping = aes(x = carat, y = price, size = price))
 
 # Try coloring the above plot based on the diamond's price!
-
+ggplot(data = diamonds.sample) +
+  geom_point(mapping = aes(x = carat, y = price, color = price))
 
 # Draw a line plot (with line geometry) for `diamonds.sample`. The x-position should be mapped to
 # carat, y-position to price, and color to carat.
+ggplot(data = diamonds.sample) +
+  geom_line(mapping = aes(x = carat, y = price, color = carat))
 
 
 # That's kind of messy. Try using `smooth` geometry instead.
-
+ggplot(data = diamonds.sample) +
+  geom_smooth(mapping = aes(x = carat, y = price, color = carat))
 
 # Draw a plot with bar geometry (a bar chart), mapping the diamond's `cut` to the x-axis
-
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut))
 
 # Add an aesthetic property that will _fill_ each bar geometry based on the `clarity` of the diamonds
 # What kind of chart do you get?
-
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut, fill = clarity))
 
 # Draw a histogram of diamond prices.
 # Try mapping each bar based on clarity as well!
-
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = price, fill = clarity))
 
 # (For a more traditional "bell-curve", make a histogram of diamond `depths`)
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = depth))
 
 # Draw a plot of the `diamonds.sample` data (price by carat), with both points for each
 # diamond AND smoothed lines for each cut (hint: in a separate color)
 # Making the points have some `alpha` transparency will make the plot look nicer
 
 # multiple geoms (point & smooth)
+ggplot(data = diamonds.sample) +
+  geom_point(mapping = aes(x = carat, y = price, color = cut), alpha = 0.25) +
+  geom_smooth(mapping = aes(x = carat, y = price, color = cut), se = FALSE)
 
 
 ## Bonus
